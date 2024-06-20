@@ -14,7 +14,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.use('/uploadImage', upload.single("uploadedImage"),require('./routes/imagesRoutes'));
+app.use(
+  "/uploadImage",
+  upload.single("uploadedImage"),
+  require("./routes/imagesRoutes")
+);
+
+app.use(
+  "/uploadDocument",
+  upload.any(),
+  require("./routes/documentsRouter")
+);
 
 // app.post("/upload/en", upload.single("uploadedImage"), async (req, res) => {
 //   console.log(req.file);
@@ -31,8 +41,6 @@ app.use('/uploadImage', upload.single("uploadedImage"),require('./routes/imagesR
 //   }
 // });
 
-
-
 // app.post("/upload/pt", upload.single("uploadedImage"), async (req, res) => {
 //   console.log(req.file);
 
@@ -47,7 +55,6 @@ app.use('/uploadImage', upload.single("uploadedImage"),require('./routes/imagesR
 //     console.log(err);
 //   }
 // });
-
 
 const PORT = 3000;
 app.listen(PORT, () => {
